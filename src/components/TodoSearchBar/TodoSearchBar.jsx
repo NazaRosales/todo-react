@@ -1,10 +1,13 @@
 import styles from "./todoSearchBar.module.css";
-const TodoSearchBar = () => {
+const TodoSearchBar = ({searchValue, setSearchValue}) => {
+  
   const handleInputChange = (e) => {
-    console.log(e.target.value);
+    setSearchValue(e.target.value);
   };
+  
   return (
     <input
+      value={searchValue}
       onInput={handleInputChange}
       className={styles.searchBar}
       type="text"

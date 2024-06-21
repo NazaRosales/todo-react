@@ -1,23 +1,29 @@
-.itemContainer{
-list-style: none;
+.itemContainer {
+  list-style: none;
 }
-.itemContainer div{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.itemContainer div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 .itemContainer span {
-    font-size: 16px;
-    margin: 10px;
-
+  font-size: 16px;
+  margin: 10px;
 }
-.itemContainer span:hover{
-    cursor: pointer;
+.itemContainer span:hover {
+  cursor: pointer;
 }
 .itemBG1 {
   background-color: #8ec1e4;
 }
 .itemBG2 {
   background-color: #d6d6d6;
+}
+.itemContainer p {
+  font-size: 20px;
+  font-weight: 600;
+}
+.completed {
+  text-decoration: line-through;
 }
