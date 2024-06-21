@@ -1,0 +1,18 @@
+.btnCreateTask {
+  background: #1d90b6;
+  color: #ece2e2;
+  font-size: 32px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: none;
+  transform: rotate(0);
+  transition: 0.3s ease;
+  
+}
+.btnCreateTask:hover {
+  cursor: pointer;
+  background: #6bbfdb;
+  transform: rotate(224deg);
+}
+

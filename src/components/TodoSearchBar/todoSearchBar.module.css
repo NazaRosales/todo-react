@@ -1,0 +1,8 @@
+.searchBar{
+    background-color: #8ec1e4;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    font-size: 18px;
+}
+.searchBar:focus { outline-color: #9ecbe9; }
