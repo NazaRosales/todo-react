@@ -9,47 +9,48 @@ function App() {
     { text: "Lavar los platos", completed: false },
     { text: "Hacer la tarea", completed: false },
     { text: "Sacar la basura", completed: false },
-    { text: "Estudiar para el exámen", completed: true },
+    { text: "Estudiar para el exámen", completed: false },
     { text: "Pasear al perro", completed: false },
   ];
 
+  const [todos, setTodos] = useState(defaultTodos);
   const [searchValue, setSearchValue] = useState("");
-  const [filteredTodos, setFilteredTodos] = useState(defaultTodos);
-  const [completeds, setCompleted] = useState(0);
+  const [filteredTodos, setFilteredTodos] = useState(todos);
 
   useEffect(() => {
-    setCompleted(
-      filteredTodos.filter((task) => {
-        return task.completed;
-      }).length
+    setFilteredTodos(
+      todos.filter((task) => {
+        const text = task?.text?.toLocaleLowerCase();
+        const searchText = searchValue?.toLocaleLowerCase();
+        return text?.includes(searchText);
+      })
     );
-  }, [filteredTodos]);
+  }, [searchValue, todos]);
 
-  const todosDisplay = filteredTodos.filter((task) => {
-    const text = task?.text?.toLocaleLowerCase();
-    const searchText = searchValue?.toLocaleLowerCase();
-    return text?.includes(searchText);
-  });
+
+  const completeds = todos.filter((task) => task.completed).length;
 
   const updateTask = (i) => {
-    setFilteredTodos([
-      ...filteredTodos,
-      (filteredTodos[i].completed = !filteredTodos[i].completed),
-    ]);
+    const newTodos = [...filteredTodos];
+    newTodos[i].completed = !newTodos[i].completed;
+    setFilteredTodos(newTodos);
   };
 
   const removeTask = (i) => {
-    setFilteredTodos(filteredTodos.filter((task, index) => index !== i));
+    const taskToRemove = filteredTodos[i]
+    const newTodos = todos.filter( task => task?.text !== taskToRemove?.text)
+    setTodos(newTodos);
   };
+
   return (
     <>
-      <TodoCounter completed={completeds} total={defaultTodos.length} />
+      <TodoCounter completed={completeds} total={todos.length} />
       <TodoSearchBar
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
       <TodoList
-        todos={todosDisplay}
+        todos={filteredTodos}
         updateTask={updateTask}
         removeTask={removeTask}
       />
