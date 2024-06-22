@@ -7,13 +7,6 @@
   align-items: center;
   justify-content: space-between;
 }
-.itemContainer span {
-  font-size: 16px;
-  margin: 10px;
-}
-.itemContainer span:hover {
-  cursor: pointer;
-}
 .itemBG1 {
   background-color: #8ec1e4;
 }
