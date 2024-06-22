@@ -1,8 +1,9 @@
 .icon {
-  color: #920a0a;
+  color: #333333d0;
   font-size: 16px;
   padding: 10px;
 }
 .icon:hover {
+  color: #920a0a;
   cursor: pointer;
 }
