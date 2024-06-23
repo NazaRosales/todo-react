@@ -2,43 +2,37 @@ import { TodoCounter } from "./components/TodoCunter/TodoCounter";
 import { TodoSearchBar } from "./components/TodoSearchBar/TodoSearchBar";
 import { TodoList } from "./components/TodoList/TodoList";
 import { BtnCreateTask } from "./components/BtnCreateTask/BtnCreateTask";
-import { useEffect, useState } from "react";
-
+import { useState } from "react";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 function App() {
-  const defaultTodos = [
-    { text: "Lavar los platos", completed: false },
-    { text: "Hacer la tarea", completed: false },
-    { text: "Sacar la basura", completed: false },
-    { text: "Estudiar para el exámen", completed: false },
-    { text: "Pasear al perro", completed: false },
-  ];
+  // const defaultTodos = [
+  //   { text: "Lavar los platos", completed: false },
+  //   { text: "Hacer la tarea", completed: false },
+  //   { text: "Sacar la basura", completed: false },
+  //   { text: "Estudiar para el exámen", completed: false },
+  //   { text: "Pasear al perro", completed: false },
+  // ];
 
-  const [todos, setTodos] = useState(defaultTodos);
+  const [todos, setTodos] = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = useState("");
-  const [filteredTodos, setFilteredTodos] = useState(todos);
-
-  useEffect(() => {
-    setFilteredTodos(
-      todos.filter((task) => {
-        const text = task?.text?.toLocaleLowerCase();
-        const searchText = searchValue?.toLocaleLowerCase();
-        return text?.includes(searchText);
-      })
-    );
-  }, [searchValue, todos]);
-
 
   const completeds = todos.filter((task) => task.completed).length;
+
+  const filteredTodos = todos.filter((task) => {
+    const text = task?.text?.toLocaleLowerCase();
+    const searchText = searchValue?.toLocaleLowerCase();
+    return text?.includes(searchText);
+  });
 
   const updateTask = (i) => {
     const newTodos = [...filteredTodos];
     newTodos[i].completed = !newTodos[i].completed;
-    setFilteredTodos(newTodos);
+    setTodos(newTodos);
   };
 
   const removeTask = (i) => {
-    const taskToRemove = filteredTodos[i]
-    const newTodos = todos.filter( task => task?.text !== taskToRemove?.text)
+    const taskToRemove = filteredTodos[i];
+    const newTodos = todos.filter((task) => task?.text !== taskToRemove?.text);
     setTodos(newTodos);
   };
 
@@ -49,11 +43,7 @@ function App() {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      <TodoList
-        todos={filteredTodos}
-        updateTask={updateTask}
-        removeTask={removeTask}
-      />
+      <TodoList todos={todos} updateTask={updateTask} removeTask={removeTask} />
       <BtnCreateTask />
     </>
   );
