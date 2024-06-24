@@ -2,6 +2,7 @@ import { TodoCounter } from "../TodoCunter/TodoCounter";
 import { TodoSearchBar } from "../TodoSearchBar/TodoSearchBar";
 import { TodoList } from "../TodoList/TodoList";
 import { BtnCreateTask } from "../BtnCreateTask/BtnCreateTask";
+import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
 const AppUI = ({
   loading,
   error,
@@ -19,14 +20,26 @@ const AppUI = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      {loading && <p>Cargando...</p>}
       {!loading && todos.length < 1 && !error ? (
         <p>Crea tu primer tarea.</p>
       ) : null}
       {error && !loading ? (
         <p>Hubo un error al intentar mostrar las tareas.</p>
       ) : null}
-      <TodoList todos={todos} updateTask={updateTask} removeTask={removeTask} />
+      {loading ? (
+        <div>
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+          <LoadingSkeleton />
+        </div>
+      ) : (
+        <TodoList
+          todos={todos}
+          updateTask={updateTask}
+          removeTask={removeTask}
+        />
+      )}
+
       <BtnCreateTask />
     </>
   );
