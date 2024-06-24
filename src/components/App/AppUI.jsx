@@ -13,13 +13,13 @@ const AppUI = () => {
     todos,
     updateTask,
     removeTask,
-    getTotalTodos,
+    totalTodos,
   } = useContext(TodosContext);
   return (
     <>
-      <TodoCounter completed={completeds} total={getTotalTodos()} />
+      <TodoCounter completed={completeds} total={totalTodos} />
       <TodoSearchBar />
-      {!loading && todos.length < 1 && !error ? (
+      {!loading && totalTodos === 0 && !error ? (
         <h2>Crea tu primer tarea.</h2>
       ) : null}
       {error && !loading ? (

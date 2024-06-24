@@ -34,7 +34,7 @@ const TodosProvider = ({ children }) => {
     const newTodos = todos.filter((task) => task?.text !== taskToRemove?.text);
     setTodos(newTodos);
   };
-
+ const totalTodos = getTotalTodos();
   return (
     <TodosContext.Provider
       value={{
@@ -43,8 +43,8 @@ const TodosProvider = ({ children }) => {
         completeds,
         todos: filteredTodos,
         searchValue,
+        totalTodos,
         setSearchValue,
-        getTotalTodos,
         updateTask,
         removeTask
       }}
