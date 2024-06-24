@@ -1,9 +1,6 @@
-import { TodoCounter } from "./components/TodoCunter/TodoCounter";
-import { TodoSearchBar } from "./components/TodoSearchBar/TodoSearchBar";
-import { TodoList } from "./components/TodoList/TodoList";
-import { BtnCreateTask } from "./components/BtnCreateTask/BtnCreateTask";
 import { useState } from "react";
-import { useLocalStorage } from "./hooks/useLocalStorage";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { AppUI } from "./AppUI";
 function App() {
   // const defaultTodos = [
   //   { text: "Lavar los platos", completed: false },
@@ -12,10 +9,13 @@ function App() {
   //   { text: "Estudiar para el exámen", completed: false },
   //   { text: "Pasear al perro", completed: false },
   // ];
-
-  const [todos, setTodos] = useLocalStorage("TODOS_V1", []);
+  const {
+    loading,
+    error,
+    item: todos,
+    saveItem: setTodos,
+  } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = useState("");
-
   const completeds = todos.filter((task) => task.completed).length;
 
   const filteredTodos = todos.filter((task) => {
@@ -37,15 +37,16 @@ function App() {
   };
 
   return (
-    <>
-      <TodoCounter completed={completeds} total={todos.length} />
-      <TodoSearchBar
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
-      <TodoList todos={todos} updateTask={updateTask} removeTask={removeTask} />
-      <BtnCreateTask />
-    </>
+    <AppUI
+      loading={loading}
+      error={error}
+      todos={todos}
+      completeds={completeds}
+      searchValue={searchValue}
+      updateTask={updateTask}
+      removeTask={removeTask}
+      setSearchValue={setSearchValue}
+    />
   );
 }
 export default App;
