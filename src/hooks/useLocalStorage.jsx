@@ -26,6 +26,12 @@ const useLocalStorage = (itemKey, initialValue) => {
     localStorage.setItem(itemKey, JSON.stringify(newItem));
     setItem(newItem);
   };
-  return { item, saveItem, loading, error };
+  const getTotalItems = () => {
+    const storageItems = JSON.parse(localStorage.getItem(itemKey));
+    if (Array.isArray(storageItems)) {
+      return storageItems.length;
+    }
+  };
+  return { item, saveItem, loading, error, getTotalItems };
 };
 export { useLocalStorage };

@@ -3,28 +3,27 @@ import { TodoSearchBar } from "../TodoSearchBar/TodoSearchBar";
 import { TodoList } from "../TodoList/TodoList";
 import { BtnCreateTask } from "../BtnCreateTask/BtnCreateTask";
 import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
-const AppUI = ({
-  loading,
-  error,
-  completeds,
-  todos,
-  searchValue,
-  setSearchValue,
-  updateTask,
-  removeTask,
-}) => {
+import { TodosContext } from "../../provider/TodosProvider";
+import { useContext } from "react";
+const AppUI = () => {
+  const {
+    loading,
+    error,
+    completeds,
+    todos,
+    updateTask,
+    removeTask,
+    getTotalTodos,
+  } = useContext(TodosContext);
   return (
     <>
-      <TodoCounter completed={completeds} total={todos.length} />
-      <TodoSearchBar
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
+      <TodoCounter completed={completeds} total={getTotalTodos()} />
+      <TodoSearchBar />
       {!loading && todos.length < 1 && !error ? (
-        <p>Crea tu primer tarea.</p>
+        <h2>Crea tu primer tarea.</h2>
       ) : null}
       {error && !loading ? (
-        <p>Hubo un error al intentar mostrar las tareas.</p>
+        <h2>Hubo un error al intentar mostrar las tareas.</h2>
       ) : null}
       {loading ? (
         <div>
