@@ -9,9 +9,10 @@ const TodosProvider = ({ children }) => {
     error,
     item: todos,
     saveItem: setTodos,
-    getTotalItems: getTotalTodos
+    getTotalItems: getTotalTodos,
   } = useLocalStorage("TODOS_V1", []);
   const [searchValue, setSearchValue] = useState("");
+  const [openModal, setOpenModal] = useState(false);
   const completeds = todos.filter((task) => task.completed).length;
 
   const filteredTodos = todos.filter((task) => {
@@ -22,7 +23,9 @@ const TodosProvider = ({ children }) => {
 
   const updateTask = (i) => {
     const newTodos = [...todos];
-    const taskIndex = todos.findIndex(task => task.text === filteredTodos[i].text);
+    const taskIndex = todos.findIndex(
+      (task) => task.text === filteredTodos[i].text
+    );
     if (taskIndex > -1) {
       newTodos[taskIndex].completed = !newTodos[taskIndex].completed;
       setTodos(newTodos);
@@ -34,7 +37,13 @@ const TodosProvider = ({ children }) => {
     const newTodos = todos.filter((task) => task?.text !== taskToRemove?.text);
     setTodos(newTodos);
   };
- const totalTodos = getTotalTodos();
+
+  const addTask = (task) => {
+    const newTodos = [...todos, task];
+    setTodos(newTodos);
+  };
+
+  const totalTodos = getTotalTodos();
   return (
     <TodosContext.Provider
       value={{
@@ -46,7 +55,10 @@ const TodosProvider = ({ children }) => {
         totalTodos,
         setSearchValue,
         updateTask,
-        removeTask
+        removeTask,
+        openModal,
+        setOpenModal,
+        addTask,
       }}
     >
       {children}

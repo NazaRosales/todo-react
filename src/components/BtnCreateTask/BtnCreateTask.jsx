@@ -1,10 +1,15 @@
+import { useContext } from "react";
 import styles from "./btnCreateTask.module.css";
+import { TodosContext } from "../../provider/TodosProvider";
 const BtnCreateTask = () => {
-  const handleCreateClick = (e) => {
-    alert("New click");
-  };
+  const { setOpenModal } = useContext(TodosContext);
   return (
-    <button className={styles.btnCreateTask} onClick={handleCreateClick}>
+    <button
+      className={styles.btnCreateTask}
+      onClick={() => {
+        setOpenModal((state) => !state);
+      }}
+    >
       +
     </button>
   );

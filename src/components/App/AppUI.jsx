@@ -5,6 +5,8 @@ import { BtnCreateTask } from "../BtnCreateTask/BtnCreateTask";
 import { LoadingSkeleton } from "../LoadingSkeleton/LoadingSkeleton";
 import { TodosContext } from "../../provider/TodosProvider";
 import { useContext } from "react";
+import { Modal } from "../Modal/Modal";
+import { FormModal } from "../Modal/FormModal/FormModal";
 const AppUI = () => {
   const {
     loading,
@@ -14,6 +16,7 @@ const AppUI = () => {
     updateTask,
     removeTask,
     totalTodos,
+    openModal,
   } = useContext(TodosContext);
   return (
     <>
@@ -40,6 +43,11 @@ const AppUI = () => {
       )}
 
       <BtnCreateTask />
+      {openModal && (
+        <Modal>
+          <FormModal />
+        </Modal>
+      )}
     </>
   );
 };
