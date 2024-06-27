@@ -1,7 +1,7 @@
 .modalContainer {
-  position: fixed; /* Cambia a fixed para que se posicione relativo a la ventana */
-  top: 60%; /* Centra verticalmente */
-  left: 50%; /* Centra horizontalmente */
+  position: fixed;
+  top: 60%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 400px;
