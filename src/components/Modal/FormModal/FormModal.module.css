@@ -1,11 +1,10 @@
 .modalContainer {
   position: fixed; /* Cambia a fixed para que se posicione relativo a la ventana */
-  top: 40%; /* Centra verticalmente */
+  top: 60%; /* Centra verticalmente */
   left: 50%; /* Centra horizontalmente */
   transform: translate(-50%, -50%);
   width: 80%;
   max-width: 400px;
-  margin-top: 20px;
   background-color: #000000;
   padding: 10px;
   box-shadow: 0 2px 6px #1fdf64;
@@ -58,7 +57,7 @@
   color: #000000;
   background-color: #1fdf64;
 }
-.btnCancel:hover{
+.btnCancel:hover {
   background-color: #111;
 }
 .modalContainer .error {
@@ -67,4 +66,13 @@
   margin: 0;
   padding: 5px;
   font-weight: 600;
+}
+
+@media screen and (max-width: 400px) {
+  .modalContainer {
+    width: 60%;
+  }
+  .modalContainer button {
+    padding: 5px 10px;
+  }
 }
