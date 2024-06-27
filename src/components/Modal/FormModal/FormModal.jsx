@@ -15,7 +15,7 @@ const FormModal = () => {
       };
       addTask(newTask);
       setText("");
-      setOpenModal(false)
+      setOpenModal(false);
     } else {
       setError("Ingresa un texto a tu tarea.");
     }
@@ -28,16 +28,35 @@ const FormModal = () => {
     setText(value);
   };
   return (
-    <form className={styles.modalContainer} onSubmit={createNewTask}>
+    <form
+      className={styles.modalContainer}
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <fieldset>
         <label>Ingresa una nueva tarea:</label>
-        <input
+        <textarea
           type="text"
           placeholder="Estudiar para el exámen de inglés."
           value={text}
           onInput={handleInputText}
         />
-        <button>Crear</button>
+        <button
+          onClick={() => {
+            setOpenModal(false);
+          }}
+          className={styles.btnCancel}
+        >
+          Cancelar
+        </button>
+        <button
+          type="submit"
+          className={styles.btnCreate}
+          onClick={createNewTask}
+        >
+          Crear
+        </button>
       </fieldset>
       {error.length > 0 ? <p className={styles.error}>{error}</p> : null}
     </form>

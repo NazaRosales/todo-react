@@ -9,9 +9,9 @@ const CompleteIcon = ({ updateTask, i, completed }) => {
       }}
     >
       {completed ? (
-        <ImCheckmark className={styles.icon} style={{color : "#208219"}}/>
+        <ImCheckmark className={styles.icon} style={{ color: "#FFF" }} />
       ) : (
-        <ImCheckmark2 className={styles.icon} />
+        <ImCheckmark2 className={styles.icon}  />
       )}
     </span>
   );

@@ -8,10 +8,11 @@
   justify-content: space-between;
 }
 .itemBG1 {
-  background-color: #8ec1e4;
+  background-color: #1fdf659d;
 }
 .itemBG2 {
-  background-color: #d6d6d6;
+  color: #f2f2f2;
+  background-color: #2a2a2ae0;
 }
 .itemContainer p {
   font-size: 20px;
