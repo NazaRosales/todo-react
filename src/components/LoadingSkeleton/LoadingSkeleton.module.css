@@ -18,7 +18,7 @@
   width: 60%;
 }
 .loadingContainer {
-  background: linear-gradient(90deg, #ffff, #67b7d6);
+  background: linear-gradient(90deg, #2A2A2A, #1fdf659d);
   background-size: 400% 400%;
   animation: rotateBackground 1.2s linear infinite;
 }
